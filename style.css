@@ -1,3 +1,182 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,ol,li{
+    list-style: none;
+}
+
+html,body, input,button{
+    scroll-behavior: smooth;
+    font-family: "Inknut Antiqua";
+}
+
+body{
+    background-color: black;
+}
+
+header{
+    top: 0;
+    position: fixed;
+    width: 100vw;
+    background-color: #8A0707;
+    padding: 25px;
+}
+
+#navegacao {
+    width: 45%;
+}
+
+#navegacao nav ul{
+    font-size: 26px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#navegacao nav a{
+    color: #FFD700;
+    font-weight: bold;
+}
+
+#containerNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#menuBurguer{
+    height: 65px;
+    width: 64px;
+    background-image: url('./img/burguerMenu.svg');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#barraDePesquisa{
+    width: 30%;
+}
+
+#pesquisar{
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    padding: 20px;
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    background-color: #FFD700;
+}
+
+::placeholder{
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+
+#pesquisar:focus::placeholder{
+    color: transparent;
+}
+
+
+
+#grupao{
+    margin-top: 40px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.titulo h1 {
+    color: #FFD700;
+    font-size: 54px;
+}
+
+.containerCards{
+    display: columns;
+    columns: 2;
+    padding: 25px;
+    gap: 130px;
+}
+
+.card {
+    width: 575px;
+    height: 314px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.grupoCard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.grupoImagem{
+    width: 50%;
+}
+
+.imagem{
+    width: 234px;
+    height: 291px;
+    background-image: url('./img/tanjiro.webp');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.textos {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.textos h1{
+    font-size: 24px;
+    color: #FFD700;
+}
+
+.textos p{
+    font-size: 13px;
+    color: white;
+}
+
+.textos button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 45px;
+    border: 2px solid #FFD700;
+    border-radius: 15px;
+    background-color: #FF0000;
+    color: #FFD700;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 
 
 
