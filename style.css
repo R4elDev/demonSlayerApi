@@ -56,13 +56,34 @@ header{
 }
 
 #menuBurguer{
-    height: 65px;
-    width: 64px;
-    background-image: var(--imagem1);
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    cursor: pointer;
+    background-color: #8A0707;
+    width: 25%;
+    height: 100vh;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    overflow: scroll;
+}
+
+#menuBurguer nav {
+    width: 100%;
+}
+
+#menuBurguer nav ul {
+    gap: 15px;
+}
+
+
+.li_menu_burguer {
+    width: 100%;
+    color: #FFD700;
+    border-top: 2px solid white;
+    font-family: "Inknut Antiqua";
 }
 
 #barraDePesquisa{
