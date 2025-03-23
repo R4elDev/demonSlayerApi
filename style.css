@@ -238,12 +238,17 @@ header{
 .imgCard {
     width: 327px;
     height: 467px;
-    background-image: url('./img/muzan.webp');
+    background-image: url('');
     background-position: center;
-    background-size: 135%;
+    background-size: 95%;
     background-repeat: no-repeat;
     border-radius: 62px;
     box-shadow: 0px 5px  10px #FF0000;
+    transition: 1s;
+}
+
+.imgCard:hover{
+    box-shadow: #FF0000 0px 0px 20px
 }
 
 .caixaDeTextos {
@@ -331,7 +336,15 @@ header{
     border-radius: 15px;
     text-align: center;
     padding: 10px;
+    transition: 1.5s;
 }
+
+.frase:hover{
+    transform: scale(1.2);
+    box-shadow: #FFD700 0px 0px 20px
+}
+
+
 
 
 
