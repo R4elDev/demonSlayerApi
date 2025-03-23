@@ -21,6 +21,7 @@ function criarLi(nome){
     const button = document.createElement('button')
     button.classList.add('li_menu_burguer')
     button.textContent = nome.name
+    button.id = nome.id
     console.log(button)
     ul.appendChild(button)
     
@@ -45,6 +46,11 @@ async function abrirMenu(){
     
 }
 
-
+document.addEventListener('click',function(event){
+    if(event.target.classList.contains('li_menu_burguer')){
+        const personagemId = event.target.id
+        procurarPersonagem(personagemId)
+    }
+})
 
 imgClick.addEventListener('click',abrirMenu)
