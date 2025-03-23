@@ -353,10 +353,19 @@ async function carregarTelaTodosOsPersonagens(){
 
 async function encontrarIdPorNome(nomeDigitado){
     const personagens = await carregar()
-    console.log(personagens)
-    const personagemEncontrado = personagens.find(p => p.name.toLowerCase().includes(nomeDigitado.toLowerCase()))
+    const respiracoes = await dadosTelaTodasAsRespiracoes()
 
-    return personagemEncontrado ? personagemEncontrado.id : null
+    const personagemEncontrado = personagens.find(p => p.name.toLowerCase().includes(nomeDigitado.toLowerCase()))
+    
+    if(personagemEncontrado){
+        return {tipo: "personagem", id: personagemEncontrado.id}
+    }
+
+    const respiracaoEncontrada = respiracoes.find(r => r.name.toLowerCase().includes(nomeDigitado.toLowerCase()))
+
+    if(respiracaoEncontrada){
+        return {tipo: "respiracao", id: respiracaoEncontrada.id}
+    }
 }
 
 async function procurarPeloInput(){
@@ -366,9 +375,13 @@ async function procurarPeloInput(){
     const idEncontrado = await encontrarIdPorNome(nomeDigitado)
 
     if(idEncontrado){
-        procurarPersonagem(idEncontrado)
+        if(idEncontrado.tipo === "personagem"){
+             procurarPersonagem(idEncontrado.id)
+        }else if(idEncontrado.tipo === "respiracao"){
+            procurarRespiracaoPorID(idEncontrado.id)
+        }
     }else{
-        alert("Personagem/Respiração não encontrada")
+        alert("PERSONAGEM / RESPIRAÇÃO NÃO ENCONTRADA")
     }
 }
 
@@ -376,7 +389,8 @@ function procurarPersonagem(id){
     window.location.href = `personagem.html?id=${id}`
 }
 
-function procurarPersonagemPorNome(id){
+
+function procurarRespiracaoPorID(id){
     window.location.href = `respiracao.html?id=${id}`
 }
 
@@ -420,7 +434,7 @@ document.addEventListener('click',function(event){
         const objetoId = event.target.id
 
         if (document.body.id === "todos_as_respiracoes") {
-            procurarPersonagemPorNome(objetoId)
+            procurarRespiracaoPorID(objetoId)
         } else {
             procurarPersonagem(objetoId)
         }

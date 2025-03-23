@@ -70,7 +70,10 @@ header{
     visibility: hidden;
     overflow: scroll;
     cursor: pointer;
+    
 }
+
+
 
 #menuBurguer nav {
     width: 100%;

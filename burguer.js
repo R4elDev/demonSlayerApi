@@ -22,7 +22,6 @@ function criarLi(nome){
     button.classList.add('li_menu_burguer')
     button.textContent = nome.name
     button.id = nome.id
-    console.log(button)
     ul.appendChild(button)
     
 }
