@@ -156,6 +156,12 @@ header{
     border-bottom: 1px solid white;
     display: flex;
     margin-bottom: 15px;
+    transition: 1s;
+    background-color: black;
+}
+
+.card:hover{
+    transform: scale(1.3);
 }
 
 .grupoCard{

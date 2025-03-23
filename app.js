@@ -121,7 +121,7 @@ async function carregarPersonagemProcurado() {
 
 }
 
-async function carregarTela(){
+async function carregarTelaPrincipal(){
 
     // Criando / pegando elementos principais
     const containerCards = document.getElementById('container-card')
@@ -164,6 +164,71 @@ async function carregarTela(){
             card.appendChild(grupoCard)
             containerCards.appendChild(card)
         }
+        
+    })
+
+
+}
+
+async function carregarTelaTodosOsPersonagens(){
+
+    // Criando / pegando elementos principais
+    const containerCards = document.getElementById('container-card')
+    const informacoes = await carregar()
+    informacoes.forEach(function(personagem){
+        // Criando elementos varridos
+        const card = document.createElement('div')
+        card.classList.add('card')
+        const grupoCard = document.createElement('div')
+        grupoCard.classList.add('grupoCard')
+        const grupoImagem = document.createElement('div')
+        grupoImagem.classList.add('grupoImagem')
+        const imagem = document.createElement('div')
+        imagem.classList.add('imagem')
+        const textos = document.createElement('div')
+        textos.classList.add('textos')
+        const nome = document.createElement('h1')
+        nome.classList.add('nome')
+        const paragrafo = document.createElement('p')
+        const button = document.createElement('button')
+        button.classList.add('procurar')
+        button.id = personagem.id
+
+        // Adicionando valor
+        imagem.style.backgroundImage = `url('${personagem.img}')`
+        nome.textContent = personagem.name
+        paragrafo.textContent = personagem.description
+        button.textContent = "SEE MORE HERE"
+
+        //Edições no css
+        containerCards.style.gridTemplateColumns = '1fr 1fr 1fr'
+        containerCards.style.gap = "40px"
+
+
+        card.style.width = "435px"
+        card.style.height = "237px"
+        card.style.marginBottom = "5px"
+
+        imagem.style.width = "177px"
+        imagem.style.height = "220px"
+
+        nome.style.fontSize = "18px"
+        paragrafo.style.fontSize = "6px"
+
+        button.style.width = "191px"
+        button.style.height = "35px"
+
+        //Adicionando os filhos
+        textos.appendChild(nome)
+        textos.appendChild(paragrafo)
+        textos.appendChild(button)
+
+        grupoCard.appendChild(grupoImagem)
+
+        grupoImagem.appendChild(imagem)
+        grupoCard.appendChild(textos)
+        card.appendChild(grupoCard)
+        containerCards.appendChild(card)
         
     })
 
@@ -222,10 +287,12 @@ document.addEventListener("DOMContentLoaded",function(){
     })
 
     if(bodyID == "pagina_inicial"){
-        carregarTela()
+        carregarTelaPrincipal()
     }else if(bodyID == "personagem-procurado"){
         carregarPersonagemProcurado()
         dadosPersonagemProcuradoPorId(idPersonagem)
+    }else if(bodyID == "todos_os_personagens"){
+        carregarTelaTodosOsPersonagens()
     }
 })
 
