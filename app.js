@@ -17,11 +17,53 @@ async function dadosTelaTodasAsRespiracoes() {
     return JSON.parse(data.contents).content
 }
 
-async function dadosRespiracaoProcuradaPorNome(nome) {
-    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?name=${nome}`;
+async function dadosRespiracaoProcurada(id) {
+    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?id=${id}`;
     const response = await fetch(url)
     const data = await response.json()
     return JSON.parse(data.contents).content
+}
+
+async function carregarRespiracaoProcurada() {
+    const cardPersonagem = document.getElementById('cardPersonagem')
+
+    const dados = await dadosRespiracaoProcurada(idPersonagem)
+
+    dados.forEach(function(respiracao){
+        if(respiracao.id == idPersonagem){
+            const grupoImagemCard = document.createElement('div')
+            grupoImagemCard.classList.add('grupoImagemCard')
+            const imgCard = document.createElement('div')
+            imgCard.classList.add('imgCard')
+            const caixaDeTextos = document.createElement('div')
+            caixaDeTextos.classList.add('caixaDeTextos')
+            const titulosCard = document.createElement('div')
+            titulosCard.classList.add('titulosCard')
+            const h1Procurado = document.createElement('h1')
+            const pProcurado = document.createElement('p')
+
+            // Adicionando conteudo
+            imgCard.style.backgroundImage = `url('${respiracao.img}')`
+            h1Procurado.textContent = respiracao.name
+            pProcurado.textContent = respiracao.description
+
+            // Edições no CSS
+            pProcurado.style.fontSize = "20px"
+            pProcurado.style.marginTop = "30px"
+
+
+            // Adicionando aos pais
+            caixaDeTextos.appendChild(titulosCard)
+            titulosCard.appendChild(h1Procurado)
+            titulosCard.appendChild(pProcurado)
+
+            grupoImagemCard.appendChild(imgCard)
+            cardPersonagem.appendChild(grupoImagemCard)
+            cardPersonagem.appendChild(caixaDeTextos)
+
+        }
+    })
+    
 }
 
 async function carregarTodasRespiracoes() {
@@ -107,7 +149,6 @@ async function carregarPersonagemProcurado() {
 
     dados.forEach(function(personagem){
         if(personagem.id == idPersonagem){
-            console.log(personagem.combat_style)
             const grupoImagemCard = document.createElement('div')
             grupoImagemCard.classList.add('grupoImagemCard')
             const imgCard = document.createElement('div')
@@ -164,13 +205,6 @@ async function carregarPersonagemProcurado() {
 
 
             // Adicionando aos pais
-            
-            
-        
-
-           
-            
-
             
             caixaDeTextos.appendChild(titulosCard)
             caixaDeTextos.appendChild(topicos)
@@ -317,21 +351,6 @@ async function carregarTelaTodosOsPersonagens(){
 
 }
 
-document.addEventListener('click',function(event){
-    if (event.target.classList.contains('procurar')) {
-        const nomePersonagem = event.target.dataset.nome; // Pegando o nome do botão
-
-        if (document.body.id === "todasAsRespiracoes") {
-            // Quando estiver na página de respirações, busca pelo nome
-            procurarPersonagemPorNome(nomePersonagem);
-        } else {
-            // Caso contrário, busca pelo ID normalmente
-            const personagemId = event.target.id;
-            procurarPersonagem(personagemId);
-        }
-    }
-})
-
 async function encontrarIdPorNome(nomeDigitado){
     const personagens = await carregar()
     console.log(personagens)
@@ -355,6 +374,10 @@ async function procurarPeloInput(){
 
 function procurarPersonagem(id){
     window.location.href = `personagem.html?id=${id}`
+}
+
+function procurarPersonagemPorNome(id){
+    window.location.href = `respiracao.html?id=${id}`
 }
 
 function obterIdPersonagem(){
@@ -384,9 +407,23 @@ document.addEventListener("DOMContentLoaded",function(){
     }else if(bodyID == "todos_os_personagens"){
         carregarTelaTodosOsPersonagens()
     }else if(bodyID == "respiracao-procurada"){
-        carregarTelaTodasAsRespiracoes()
+        carregarRespiracaoProcurada()
+        dadosRespiracaoProcurada(idPersonagem)
+
     }else if(bodyID == "todos_as_respiracoes"){
         carregarTodasRespiracoes()
+    }
+})
+
+document.addEventListener('click',function(event){
+    if (event.target.classList.contains('procurar')) {
+        const objetoId = event.target.id
+
+        if (document.body.id === "todos_as_respiracoes") {
+            procurarPersonagemPorNome(objetoId)
+        } else {
+            procurarPersonagem(objetoId)
+        }
     }
 })
 
