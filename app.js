@@ -9,17 +9,19 @@ async function carregar() {
 
 }
 
-async function dadosPersonagemProcurado(id) {
+async function dadosPersonagemProcuradoPorId(id) {
     const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?id=${id}`;
     const response = await fetch(url)
     const data = await response.json()
     return JSON.parse(data.contents).content
 }
 
+
+
 async function carregarPersonagemProcurado() {
     const cardPersonagem = document.getElementById('cardPersonagem')
 
-    const dados = await dadosPersonagemProcurado(idPersonagem)
+    const dados = await dadosPersonagemProcuradoPorId(idPersonagem)
 
     dados.forEach(function(personagem){
         if(personagem.id == idPersonagem){
@@ -175,9 +177,29 @@ document.addEventListener('click',function(event){
     }
 })
 
+async function encontrarIdPorNome(nomeDigitado){
+    const personagens = await carregar()
+    console.log(personagens)
+    const personagemEncontrado = personagens.find(p => p.name.toLowerCase().includes(nomeDigitado.toLowerCase()))
+
+    return personagemEncontrado ? personagemEncontrado.id : null
+}
+
+async function procurarPeloInput(){
+    const nomeDigitado = document.getElementById('pesquisar').value.trim();
+    if(!nomeDigitado) return
+
+    const idEncontrado = await encontrarIdPorNome(nomeDigitado)
+
+    if(idEncontrado){
+        procurarPersonagem(idEncontrado)
+    }else{
+        alert("Personagem/Respiração não encontrada")
+    }
+}
+
 function procurarPersonagem(id){
     window.location.href = `personagem.html?id=${id}`
-     
 }
 
 function obterIdPersonagem(){
@@ -191,11 +213,24 @@ const idPersonagem = obterIdPersonagem()
 
 document.addEventListener("DOMContentLoaded",function(){
     const bodyID = document.body.id
+    const inputPesquisa = document.getElementById("pesquisar")
+
+    inputPesquisa.addEventListener("keydown", async function(event){
+        if(event.key === "Enter"){
+            procurarPeloInput()
+        }
+    })
 
     if(bodyID == "pagina_inicial"){
         carregarTela()
     }else if(bodyID == "personagem-procurado"){
         carregarPersonagemProcurado()
-        dadosPersonagemProcurado(idPersonagem)
+        dadosPersonagemProcuradoPorId(idPersonagem)
     }
 })
+
+
+
+
+
+
