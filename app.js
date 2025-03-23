@@ -9,14 +9,96 @@ async function carregar() {
 
 }
 
+async function dadosTelaTodasAsRespiracoes() {
+    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?limit=40`;
+    const response = await fetch(url)
+    const data = await response.json()
+   
+    return JSON.parse(data.contents).content
+}
+
+async function dadosRespiracaoProcuradaPorNome(nome) {
+    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?name=${nome}`;
+    const response = await fetch(url)
+    const data = await response.json()
+    return JSON.parse(data.contents).content
+}
+
+async function carregarTodasRespiracoes() {
+    // Criando / pegando elementos principais
+    const containerCards = document.getElementById('container-card')
+    const respiracoes = await dadosTelaTodasAsRespiracoes()
+    respiracoes.forEach(function(resp){
+        // Criando elementos varridos
+        const card = document.createElement('div')
+        card.classList.add('card')
+        const grupoCard = document.createElement('div')
+        grupoCard.classList.add('grupoCard')
+        const grupoImagem = document.createElement('div')
+        grupoImagem.classList.add('grupoImagem')
+        const imagem = document.createElement('div')
+        imagem.classList.add('imagem')
+        const textos = document.createElement('div')
+        textos.classList.add('textos')
+        const nome = document.createElement('h1')
+        nome.classList.add('nome')
+        const paragrafo = document.createElement('p')
+        const button = document.createElement('button')
+        button.classList.add('procurar')
+        button.id = resp.id
+
+        // Adicionando valor
+        imagem.style.backgroundImage = `url('${resp.img}')`
+        nome.textContent = resp.name
+        paragrafo.textContent = resp.description
+        button.textContent = "SEE MORE HERE"
+        button.dataset.nome = resp.name
+
+        //Edições no css
+        containerCards.style.gridTemplateColumns = '1fr 1fr 1fr'
+        containerCards.style.gap = "40px"
+
+
+        card.style.width = "435px"
+        card.style.height = "237px"
+        card.style.marginBottom = "5px"
+        card.style.borderTop = "none"
+        card.style.borderBottom = "none"
+        card.style.borderRadius = "15px"
+        
+
+        imagem.style.width = "177px"
+        imagem.style.height = "220px"
+        imagem.style.borderRadius = "20px"
+
+        nome.style.fontSize = "18px"
+        paragrafo.style.fontSize = "8px"
+
+        button.style.width = "191px"
+        button.style.height = "35px"
+
+        //Adicionando os filhos
+        textos.appendChild(nome)
+        textos.appendChild(paragrafo)
+        textos.appendChild(button)
+
+        grupoCard.appendChild(grupoImagem)
+
+        grupoImagem.appendChild(imagem)
+        grupoCard.appendChild(textos)
+        card.appendChild(grupoCard)
+        containerCards.appendChild(card)
+        
+    })
+}
+
+
 async function dadosPersonagemProcuradoPorId(id) {
     const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?id=${id}`;
     const response = await fetch(url)
     const data = await response.json()
     return JSON.parse(data.contents).content
 }
-
-
 
 async function carregarPersonagemProcurado() {
     const cardPersonagem = document.getElementById('cardPersonagem')
@@ -236,9 +318,17 @@ async function carregarTelaTodosOsPersonagens(){
 }
 
 document.addEventListener('click',function(event){
-    if(event.target.classList.contains('procurar')){
-        const personagemId = event.target.id
-        procurarPersonagem(personagemId)
+    if (event.target.classList.contains('procurar')) {
+        const nomePersonagem = event.target.dataset.nome; // Pegando o nome do botão
+
+        if (document.body.id === "todasAsRespiracoes") {
+            // Quando estiver na página de respirações, busca pelo nome
+            procurarPersonagemPorNome(nomePersonagem);
+        } else {
+            // Caso contrário, busca pelo ID normalmente
+            const personagemId = event.target.id;
+            procurarPersonagem(personagemId);
+        }
     }
 })
 
@@ -293,6 +383,10 @@ document.addEventListener("DOMContentLoaded",function(){
         dadosPersonagemProcuradoPorId(idPersonagem)
     }else if(bodyID == "todos_os_personagens"){
         carregarTelaTodosOsPersonagens()
+    }else if(bodyID == "respiracao-procurada"){
+        carregarTelaTodasAsRespiracoes()
+    }else if(bodyID == "todos_as_respiracoes"){
+        carregarTodasRespiracoes()
     }
 })
 
