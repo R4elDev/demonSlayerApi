@@ -32,11 +32,11 @@ async function abrirMenu(){
     
     if(menuBurguer.style.visibility == "hidden"){
         menuBurguer.style.visibility = "visible"
-        imgClick.src = "./img/xAoClique.png"
+        imgClick.src = "../img/xAoClique.png"
         await criarListaDeNomes()
     }else{
         menuBurguer.style.visibility = "hidden"
-        imgClick.src = "./img/burguerMenu.svg"
+        imgClick.src = "../img/burguerMenu.svg"
         ul.replaceChildren('')
     }
     
