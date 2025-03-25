@@ -37,17 +37,17 @@ async function abrirMenu(){
     if(menuBurguer.style.visibility == "hidden"){
         menuBurguer.style.visibility = "visible"
         if(document.body.id == "pagina_inicial"){
-            imgClick.src = "./src/img/burguerMenu.svg"
+            imgClick.src = "./src/img/xAoClique.png"
         }else{
-            imgClick.src = "../img/burguerMenu.svg"
+            imgClick.src = "../img/xAoClique.png"
         }
         await criarListaDeNomes()
     }else{
         menuBurguer.style.visibility = "hidden"
         if(document.body.id == "pagina_inicial"){
-            imgClick.src = "./src/img/xAoClique.png"
+            imgClick.src = "./src/img/burguerMenu.svg"
         }else{
-            imgClick.src = "../img/xAoClique.png"   
+            imgClick.src = "../img/burguerMenu.svg"   
         }
         ul.replaceChildren('')
     }
