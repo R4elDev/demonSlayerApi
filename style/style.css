@@ -5,8 +5,8 @@
 }
 
 :root {
-    --imagem1: url('./img/burguerMenu.svg');
-    --imagem2: url('./img/xAoClique.png');
+    --imagem1: url('../src/img/burguerMenu.svg');
+    --imagem2: url('../src/img/xAoClique.png');
 }
 
 a {

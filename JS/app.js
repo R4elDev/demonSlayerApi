@@ -386,7 +386,11 @@ async function procurarPeloInput(){
 }
 
 function procurarPersonagem(id){
-    window.location.href = `personagem.html?id=${id}`
+    if(document.body.id === "pagina_inicial"){
+        window.location.href = `./src/screens/personagem.html?id=${id}`
+    }else{
+        window.location.href = `personagem.html?id=${id}`
+    }
 }
 
 

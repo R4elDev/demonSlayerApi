@@ -2,6 +2,10 @@
 
 const imgClick = document.getElementById('imgClick')
 const ul = document.getElementById('lista_menu')
+const imgs= [
+    'var(--imagem1)',
+    'var(--imagem2)'
+]
 
 async function carregar() {
     const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?limit=45`;
@@ -32,11 +36,19 @@ async function abrirMenu(){
     
     if(menuBurguer.style.visibility == "hidden"){
         menuBurguer.style.visibility = "visible"
-        imgClick.src = "./img/xAoClique.png"
+        if(document.body.id == "pagina_inicial"){
+            imgClick.src = "./src/img/burguerMenu.svg"
+        }else{
+            imgClick.src = "../img/burguerMenu.svg"
+        }
         await criarListaDeNomes()
     }else{
         menuBurguer.style.visibility = "hidden"
-        imgClick.src = "./img/burguerMenu.svg"
+        if(document.body.id == "pagina_inicial"){
+            imgClick.src = "./src/img/xAoClique.png"
+        }else{
+            imgClick.src = "../img/xAoClique.png"   
+        }
         ul.replaceChildren('')
     }
     
