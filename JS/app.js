@@ -1,16 +1,21 @@
 
 
 async function carregar() {
-    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?limit=45`;
+
+    const url = `https://www.demonslayer-api.com/api/v1/characters?limit=45`
+    // const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?limit=45`
     const response = await fetch(url)
         
     const data = await response.json()
     return JSON.parse(data.contents).content
+    // return data.content
 
 }
 
 async function dadosTelaTodasAsRespiracoes() {
-    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?limit=40`;
+    const url = `https://www.demonslayer-api.com/api/v1/combat-styles?limit=40`
+    
+    // const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?limit=40`
     const response = await fetch(url)
     const data = await response.json()
    
@@ -18,9 +23,13 @@ async function dadosTelaTodasAsRespiracoes() {
 }
 
 async function dadosRespiracaoProcurada(id) {
-    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?id=${id}`;
+    const url = `https://www.demonslayer-api.com/api/v1/combat-styles?id=${id}`
+
+    // const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/combat-styles?id=${id}`
     const response = await fetch(url)
     const data = await response.json()
+
+    
     return JSON.parse(data.contents).content
 }
 
@@ -136,9 +145,13 @@ async function carregarTodasRespiracoes() {
 
 
 async function dadosPersonagemProcuradoPorId(id) {
-    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?id=${id}`;
+    const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?id=${id}`
+
+    // const url = `https://api.allorigins.win/get?url=https://www.demonslayer-api.com/api/v1/characters?id=${id}`
     const response = await fetch(url)
     const data = await response.json()
+    
+    // return data.content
     return JSON.parse(data.contents).content
 }
 
